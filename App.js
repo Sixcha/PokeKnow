@@ -9,12 +9,9 @@ import {
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AllPokemons from './components/AllPokemons';
-import MyTeam from './components/MyTeam';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MyTeamStackScreen from './components/MyTeamStackScreen';
+import CaughtPokemon from './components/CaughtPokemon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useStore from './data/store';
 
@@ -30,9 +27,6 @@ const checkStorage = async () => {
     if (value !== null){
       const valueJson = JSON.parse(value)
       changeInitialValue(valueJson);
-      //setCaughtPokemon(JSON.parse(value));
-      //useStore(state => state.checkStorage);
-      //setIsStorageChecked(true);
     }       
 
   } catch (e) {
@@ -45,39 +39,15 @@ const checkStorage = async () => {
     checkStorage();
   }, [])  
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: 'white',
-          tabBarActiveBackgroundColor: '#3466AF' ,
-          tabBarInactiveTintColor: 'black',
-          tabBarInactiveBackgroundColor: 'lightblue' ,
-          headerShown:false,
-          lazy: true
-        }}>
-        <Tab.Screen
-          name ="All Pokemon"
-          component={AllPokemons}
-          options={{ headerTintColor: '#fff',
-          tabBarIcon: ({size, color}) => (<MaterialCommunityIcons name={"pokeball"} color={color} size={size} />),
-          headerStyle:{
-            backgroundColor: '#27292c',
-          } }}
-        />
-        <Tab.Screen
-          name='My Team'
-          component={MyTeamStackScreen}
-          options={{ headerTintColor: '#fff',
-          tabBarIcon: ({size, color}) => (<MaterialIcons name={"computer"} color={color} size={size} />),
-          headerStyle:{
-            backgroundColor: '#27292c',
-          } }}
-        />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name="MainScreen" component={MyTeamStackScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="ChosenPokemon" component={CaughtPokemon} options={{ headerShown: false }}/>
+      </Stack.Navigator>
     </NavigationContainer>
     
   )

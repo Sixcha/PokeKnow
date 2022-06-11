@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
-const Pokemon = ({id, name, type1, type2, color, pressFunction, longPressFunction}) => {
+const Pokemon = ({id, name, type1, type2, color, pressFunction, longPressFunction, otherId}) => {
 
   const [picture, setPicture] = useState()
 
@@ -36,7 +36,7 @@ const Pokemon = ({id, name, type1, type2, color, pressFunction, longPressFunctio
   
 
   return (
-      <TouchableOpacity style={[styles.pokemonFlexItem,{backgroundColor: color}]} onPress={() => pressFunction(name)}  /* onLongPress={() => longPressFunction()} */ >
+      <TouchableOpacity style={[styles.pokemonFlexItem,{backgroundColor: color}]} onPress={() => pressFunction(name, otherId)}  /* onLongPress={() => longPressFunction()} */ >
         <View style={styles.pokemonFlexContainer}>
           <Image style={styles.pokemonImage}  /* source={{uri: picture}} */ />
           <View style={styles.pokemonFlexFix}>

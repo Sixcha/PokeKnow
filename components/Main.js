@@ -54,7 +54,7 @@ const Main = () => {
   }
 
   //Add to Caught pokemon
-  const addToTeam = (pkmnName) => {
+  const addToTeam = (pkmnName, key) => {
     const newPokemon = PokemonStats.find((pkmn) => {
       return pkmn.Name === pkmnName
     })
@@ -63,9 +63,12 @@ const Main = () => {
   }
 
   //TODO: Open stats window for pokemon
-  const checkPkmn = () => {
+  const checkPkmn = (pkmnName, number) => {
     console.log('definitely checking pokemon')
-    navigation.navigate('ChosenPokemon')
+    navigation.navigate('ChosenPokemon',
+    {
+      params: { id: number },
+    })
   }
 
   //Render

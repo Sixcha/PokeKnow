@@ -37,7 +37,7 @@ const MyPokemon = ({ pressFunction }) => {
     return (
       <View style={styles.background}>
         {caughtPokemon.map((pkmn , i) => 
-            <Pokemon key={i} id={pkmn['No.']} name={pkmn['Name']} type1={pkmn['Type 1']} type2={pkmn['Type 2']} color={colours[pkmn['Type 1'].toLowerCase()]} pressFunction={pressFunction} /* longPressFunction={resetAllPokemon} *//>
+            <Pokemon key={i} id={pkmn['No.']} name={pkmn['Name']} type1={pkmn['Type 1']} type2={pkmn['Type 2']} color={colours[pkmn['Type 1'].toLowerCase()]} pressFunction={pressFunction} otherId={i}/* longPressFunction={resetAllPokemon} *//>
         )}
       </View>
     )
