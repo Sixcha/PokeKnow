@@ -18,7 +18,7 @@ const Main = () => {
   const window = useWindowDimensions();
 
   const setStats = (newPokemon) => {
-    newPokemon["Total HP"] = newPokemon["HP"] + newPokemon["Vitality"];
+    newPokemon["Total HP"] = newPokemon["HP"];
     newPokemon["Will"] = newPokemon["Insight"] + 2;
     newPokemon["Initiative"] = newPokemon["Dexterity"];
     newPokemon["Strength Clash"] = newPokemon["Strength"];
