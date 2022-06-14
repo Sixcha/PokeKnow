@@ -64,7 +64,6 @@ const Main = () => {
 
   //TODO: Open stats window for pokemon
   const checkPkmn = (pkmnName, number) => {
-    console.log('definitely checking pokemon')
     navigation.navigate('ChosenPokemon',
     {
       params: { id: number },

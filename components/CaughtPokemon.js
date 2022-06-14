@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import useStore from '../data/store';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeStatCircleFull from './FontAwesomeStatCircleFull';
+import FontAwesomeStatCircleEmpty from './FontAwesomeStatCircleEmpty';
 
 const CaughtPokemon = ({ route, navigation }) => {
     const caughtPokemon = useStore(state => state.caughtPokemon)
@@ -8,7 +11,26 @@ const CaughtPokemon = ({ route, navigation }) => {
     const pokemonId = route.params.params.id;
     const currentPokemon = caughtPokemon[pokemonId]
     console.log(currentPokemon)
+    const statsToCheck = ["Strength","Dexterity","Vitality","Special","Insight"]
+    let statsToDistribute = [[],[],[],[],[]]
     
+    const setCurrentStats = () => {
+        for (let i = 0; i < statsToCheck.length; i++) {
+            let statToCheck = statsToCheck[i]
+            let statMax = "Max "+statToCheck
+            let statEmptyCircles = currentPokemon[statMax] - currentPokemon[statToCheck]
+            for (let j = 0; j < currentPokemon[statToCheck]; j++) {
+                statsToDistribute[i].push(1)
+            }
+            for (let k = 0; k < statEmptyCircles; k++) {
+                statsToDistribute[i].push(0)
+            }
+            
+        }
+    }
+
+    setCurrentStats()
+    console.log(statsToDistribute)
 
   return (
     <View style={[styles.background]}>
@@ -37,35 +59,106 @@ const CaughtPokemon = ({ route, navigation }) => {
                             <Text style={[styles.statText]}> Strength:</Text>
                             <Text style={[styles.statText]}>{currentPokemon.Strength} / {currentPokemon["Max Strength"]} </Text>
                         </View>
-                        <Text style={[styles.whiteText]}> BALLZ </Text>
+                        <View style={[styles.rowFlex]}>
+                            {statsToDistribute[0].map( (number, i) => {
+                                if (number === 1){
+                                    return (
+                                        <FontAwesomeStatCircleFull key={i}/>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <FontAwesomeStatCircleEmpty key={i}/>
+                                    )
+                                }
+
+                            })}
+                        </View>
+                        
                     </View>
                     <View style={[styles.statBorder]}>
                         <View style={[styles.rowFlexSeparated]}>
                             <Text style={[styles.statText]}> Dexterity:</Text>
                             <Text style={[styles.statText]}>{currentPokemon.Dexterity} / {currentPokemon["Max Dexterity"]} </Text>
                         </View>
-                        <Text style={[styles.whiteText]}> BALLZ </Text>
+                        <View style={[styles.rowFlex]}>
+                            {statsToDistribute[1].map( (number, i) => {
+                                if (number === 1){
+                                    return (
+                                        <FontAwesomeStatCircleFull key={i}/>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <FontAwesomeStatCircleEmpty key={i}/>
+                                    )
+                                }
+
+                            })}
+                        </View>
                     </View>
                     <View style={[styles.statBorder]}>
                         <View style={[styles.rowFlexSeparated]}>
                             <Text style={[styles.statText]}> Vitality:</Text>
                             <Text style={[styles.statText]}>{currentPokemon.Vitality} / {currentPokemon["Max Vitality"]} </Text>
                         </View>
-                        <Text style={[styles.whiteText]}> BALLZ </Text>
+                        <View style={[styles.rowFlex]}>
+                            {statsToDistribute[2].map( (number, i) => {
+                                if (number === 1){
+                                    return (
+                                        <FontAwesomeStatCircleFull key={i}/>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <FontAwesomeStatCircleEmpty key={i}/>
+                                    )
+                                }
+
+                            })}
+                        </View>
                     </View>
                     <View style={[styles.statBorder]}>
                         <View style={[styles.rowFlexSeparated]}>
                             <Text style={[styles.statText]}> Special:</Text>
                             <Text style={[styles.statText]}>{currentPokemon.Special} / {currentPokemon["Max Special"]} </Text>
                         </View>
-                        <Text style={[styles.whiteText]}> BALLZ </Text>
+                        <View style={[styles.rowFlex]}>
+                            {statsToDistribute[3].map( (number, i) => {
+                                if (number === 1){
+                                    return (
+                                        <FontAwesomeStatCircleFull key={i}/>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <FontAwesomeStatCircleEmpty key={i}/>
+                                    )
+                                }
+
+                            })}
+                        </View>
                     </View>
                     <View style={[styles.statBorder]}>
                         <View style={[styles.rowFlexSeparated]}>
                             <Text style={[styles.statText]}> Insight:</Text>
                             <Text style={[styles.statText]}>{currentPokemon.Insight} / {currentPokemon["Max Insight"]} </Text>
                         </View>
-                        <Text style={[styles.whiteText]}> BALLZ </Text>
+                        <View style={[styles.rowFlex]}>
+                            {statsToDistribute[4].map( (number, i) => {
+                                if (number === 1){
+                                    return (
+                                        <FontAwesomeStatCircleFull key={i}/>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <FontAwesomeStatCircleEmpty key={i}/>
+                                    )
+                                }
+
+                            })}
+                        </View>
 
                     </View>
                     
@@ -181,8 +274,13 @@ const styles = StyleSheet.create({
         flex:1
     },
 
+    statCircles:{
+       paddingLeft:3,
+       fontSize: 15,
+    },
+
     pokemonName:{
         fontSize:25
-    }
+    },
 
 })
