@@ -51,6 +51,8 @@ const Main = () => {
     newPokemon.Etiquette = 0
     newPokemon.Intimidate = 0
     newPokemon.Perform = 0
+
+    newPokemon["Current Ability"] = newPokemon["Ability 1"]
   }
 
   //Add to Caught pokemon
