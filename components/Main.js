@@ -53,6 +53,9 @@ const Main = () => {
     newPokemon.Perform = 0
 
     newPokemon["Current Ability"] = newPokemon["Ability 1"]
+    newPokemon.Gender = 0
+    newPokemon.Moves = {}
+    newPokemon["In Party"] = 0
   }
 
   //Add to Caught pokemon

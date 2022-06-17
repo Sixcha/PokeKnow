@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MyTeamStackScreen from './components/MyTeamStackScreen';
+import MyTeamStackScreen from './components/TabScreen';
 import CaughtPokemon from './components/CaughtPokemon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useStore from './data/store';
+import PokemonStatEdit from './components/PokemonStatEdit';
+import PokemonMoveEdit from './components/PokemonMoveEdit';
 
 
 const App = () => {
@@ -47,6 +49,8 @@ const Stack = createNativeStackNavigator();
       <Stack.Navigator>
         <Stack.Screen name="MainScreen" component={MyTeamStackScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="ChosenPokemon" component={CaughtPokemon} options={{ headerShown: false }}/>
+        <Stack.Screen name="StatEdit" component={PokemonStatEdit} options={{ headerShown: false }}/>
+        <Stack.Screen name="MoveEdit" component={PokemonMoveEdit} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
     

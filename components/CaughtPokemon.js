@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    SafeAreaView,
+    ScrollView,
+} from 'react-native'
 import React from 'react'
 import useStore from '../data/store';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeStatCircleFull from './FontAwesomeStatCircleFull';
 import FontAwesomeStatCircleEmpty from './FontAwesomeStatCircleEmpty';
 import PokemonAbilities from '../data/PokeRoleAbilities.json';
-import colours from '../data/TypeColours.json'
+import PokemonMoves from '../data/PokeMoveSorted.json';
+import colours from '../data/TypeColours.json';
+import NewButton from './NewButton';
 
 const CaughtPokemon = ({ route, navigation }) => {
     const caughtPokemon = useStore(state => state.caughtPokemon)
@@ -39,6 +47,20 @@ const CaughtPokemon = ({ route, navigation }) => {
         }
     }
 
+    const editMoves = () => {
+    navigation.navigate('MoveEdit',
+    {
+        params: { id: pokemonId },
+    })
+    }
+
+    const editStats = () => {
+    navigation.navigate('StatEdit',
+    {
+        params: { id: pokemonId },
+    })
+    }
+
     const type1Colour = colours[currentPokemon['Type 1'].toLowerCase()]
 
     setCurrentStats()
@@ -50,9 +72,20 @@ const CaughtPokemon = ({ route, navigation }) => {
             <View style={[styles.topBox]}>
                 <Image source={require('../images/ditto.png')}/>
                 <View style={[styles.columnFlex]}>
-                    <View style={[styles.rowFlex]}>
-                        <Text style={[styles.whiteText, styles.pokemonName]}>{currentPokemon.Name}</Text>
-                        <Image/>
+                    <View style={[styles.rowFlexSeparated]}>
+                        <View style={[styles.rowFlex]}>
+                            <Text style={[styles.whiteText, styles.pokemonName]}>{currentPokemon.Name}</Text>
+                            <Image/>
+                        </View>
+                        <View style={[styles.rowFlex]}>
+                            <View style={[{minWidth:50}]}>
+                                <NewButton name={'edit'} pressFunction={editStats}></NewButton>
+                            </View> 
+                            <View style={[{minWidth:50}]}>
+                                <NewButton name={'trash-2'} pressFunction={editMoves}></NewButton>
+                            </View>
+                        </View>
+                        
                     </View>
                     <View style={[styles.rowFlex]}>
                         <View style={[styles.rowFlex]}>
@@ -238,7 +271,14 @@ const CaughtPokemon = ({ route, navigation }) => {
                     </View>
                 </View>
             </View>
-            <View style={[styles.bottomBox]}>
+            <View style={[styles.movesBox]}>
+                <View style={[styles.rowFlexSeparated]}>
+                    <Text style={[styles.whiteText,{fontSize:20}]}>MOVES</Text>
+                    <View style={[{minWidth:50}]}>
+                        <NewButton name={'edit'} pressFunction={editMoves}></NewButton>
+                    </View>
+                   
+                </View>
                 <View style={[styles.columnFlex,styles.move,{backgroundColor:type1Colour}]}>
                     <Text>Tail Glow</Text>
                     <Text>The user emits a strong light. This Pokémon will stare at its brightness to enter a trance.</Text>
@@ -279,6 +319,15 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection:'row',
         marginLeft:20,
+        marginRight:20,
+    },
+
+    movesBox:{
+        flex: 2,
+        flexDirection:'column',
+        marginLeft:20,
+        marginRight:20,
+        marginTop:20
     },
 
     rowFlex:{
@@ -341,13 +390,15 @@ const styles = StyleSheet.create({
         color:'white',
         padding:3,
         marginRight:10,
+        minWidth:50,
+        textAlign:'center'
     },
 
     move:{
         borderWidth:1,
-        borderColor:'#4f535a',
+        borderColor:'black',
         padding:3,
         borderRadius:10,
-    }
+    },
 
 })

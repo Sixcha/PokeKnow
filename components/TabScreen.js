@@ -10,9 +10,6 @@ import AllPokemons from './AllPokemons';
 const MyTeamStackScreen = () => {
 
 const Tab = createBottomTabNavigator();
-const route = useRoute();
-const [currentRoute, setCurrentRoute] = useState(route.name)
-console.log(currentRoute);
 
   return (
     <Tab.Navigator

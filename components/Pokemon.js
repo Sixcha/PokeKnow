@@ -15,7 +15,6 @@ const Pokemon = ({id, name, type1, type2, color, pressFunction, longPressFunctio
       return finalId;
     }
   }
-
   const getPicture = () => {
     fetch("https://pokeapi.co/api/v2/pokemon/"+ shortenId({id}))
     .then(res => {
@@ -75,14 +74,12 @@ const styles = StyleSheet.create({
     resizeMode:'contain',
     width:'95%',
     height:'95%',
-    //backgroundColor:'red',
     flexBasis:'44%',
   },
   pokemonFlexFix:{
     flexBasis:'56%',
     alignItems:'center',
     height:'100%',
-    //backgroundColor:'green'
   },
   pokemonName:{
     textAlign:'justify'
