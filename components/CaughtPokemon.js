@@ -14,6 +14,7 @@ import PokemonAbilities from '../data/PokeRoleAbilities.json';
 import PokemonMoves from '../data/PokeMoveSorted.json';
 import colours from '../data/TypeColours.json';
 import NewButton from './NewButton';
+import PokemonMove from './PokemonMove';
 
 const CaughtPokemon = ({ route, navigation }) => {
     const caughtPokemon = useStore(state => state.caughtPokemon)
@@ -59,6 +60,10 @@ const CaughtPokemon = ({ route, navigation }) => {
     {
         params: { id: pokemonId },
     })
+    }
+
+    const checkMoveType = (move) => {
+        
     }
 
     const type1Colour = colours[currentPokemon['Type 1'].toLowerCase()]
@@ -279,21 +284,12 @@ const CaughtPokemon = ({ route, navigation }) => {
                     </View>
                    
                 </View>
-                <View style={[styles.columnFlex,styles.move,{backgroundColor:type1Colour}]}>
-                    <Text>Tail Glow</Text>
-                    <Text>The user emits a strong light. This Pokémon will stare at its brightness to enter a trance.</Text>
-                    <View style={[styles.rowFlex]}>
-                        <Text style={[{marginRight:50}]}>Type: Bug</Text>
-                        <Text> Support</Text>
-                    </View>
-                    <View style={[styles.rowFlex]}>
-                        <Text style={[{marginRight:50}]}>Target: User</Text>
-                        <Text>Power: 0</Text>
-                    </View>
-                    <Text>Damage Dice: None</Text>
-                    <Text>Accuracy Dice: INSIGHT + NATURE</Text>
-                    <Text>Effect: Increase the User's Special by 3.</Text>
-                </View>
+                {currentPokemon.Moves.map((move , i) => {
+                    return(
+                        <PokemonMove key={i} name={move}></PokemonMove>
+                    )
+                })}
+
             </View>
         </ScrollView>
     </SafeAreaView>

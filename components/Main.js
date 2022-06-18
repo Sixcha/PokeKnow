@@ -54,7 +54,7 @@ const Main = () => {
 
     newPokemon["Current Ability"] = newPokemon["Ability 1"]
     newPokemon.Gender = 0
-    newPokemon.Moves = {}
+    newPokemon.Moves = []
     newPokemon["In Party"] = 0
   }
 
