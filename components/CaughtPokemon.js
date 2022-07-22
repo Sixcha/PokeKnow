@@ -15,12 +15,15 @@ import PokemonMoves from '../data/PokeMoveSorted.json';
 import colours from '../data/TypeColours.json';
 import NewButton from './NewButton';
 import PokemonMove from './PokemonMove';
+import PokemonMoveLearned from './PokemonMoveLearned';
 
 const CaughtPokemon = ({ route, navigation }) => {
     const caughtPokemon = useStore(state => state.caughtPokemon)
+    const setStorePokemonID = useStore(state => state.setSelectedPokemonID)
 
     const pokemonId = route.params.params.id;
     const currentPokemon = caughtPokemon[pokemonId]
+    setStorePokemonID(pokemonId)
     const statsToCheck = ["Strength","Dexterity","Vitality","Special","Insight"]
     let statsToDistribute = [[],[],[],[],[]]
     
@@ -286,7 +289,7 @@ const CaughtPokemon = ({ route, navigation }) => {
                 </View>
                 {currentPokemon.Moves.map((move , i) => {
                     return(
-                        <PokemonMove key={i} name={move}></PokemonMove>
+                        <PokemonMoveLearned key={i} name={move}></PokemonMoveLearned>
                     )
                 })}
 

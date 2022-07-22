@@ -22,5 +22,6 @@ const styles = StyleSheet.create({
   buttonSymbol:{
     color:'white',
     fontSize:23,
+    justifyContent:'center'
   }
 })
